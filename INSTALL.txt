@@ -4,8 +4,8 @@ To install nQuake, start Terminal by opening your Applications folder, and
 then scroll down to Utilities, and double-click the Terminal icon.
 
 If you downloaded nQuake to the ~/Downloads folder (default behaviour in
-Mac OS X Leopard), you will need to change directory to that folder before
-proceeding.
+Mac OS X Snow Leopard), you will need to change directory to that folder
+before proceeding.
 
 
 $ cd ~/Downloads
@@ -14,10 +14,10 @@ $ cd ~/Downloads
 Once this is done, you will need to extract the nQuake package.
 
 
-$ tar xvzf nquake13a_installer-macosx.tar.gz
+$ tar xvzf nquake20_installer-macosx.tar.gz
 
 
-The version of the installer may vary (in this case 13a), so try typing nquake
+The version of the installer may vary (in this case 20), so try typing nquake
 and then pressing tab to let Terminal auto-complete the filename if you are
 unsure.
 
@@ -27,7 +27,7 @@ follow the instructions. You can use tab to auto-complete the folder name here
 as well.
 
 
-$ cd nquake13a_installer-macosx/
+$ cd nquake20_installer-macosx/
 $ ./install_nquake.sh
 
 
@@ -39,6 +39,9 @@ After installation has completed, start QuakeWorld by browsing your way to
 the nQuake folder (by default installed in /Applications/nQuake) using Finder,
 and double-click the "EZQuake-GL" application icon.
 
+If you are interested in playing the full Quake game (singleplayer), you need
+to buy Quake. From the Quake installation, copy pak1.pak to /nQuake/id1/.
+
 Thank you for downloading nQuake
 -
-2008-06-06
+2012-08-18

@@ -1,17 +1,17 @@
 #!/bin/bash
 
-# nQuake Bash Installer Script v1.3a (for Mac OS X)
+# nQuake Bash Installer Script v2.0 (for Mac OS X)
 # by Empezar
 
 echo
-echo Welcome to the nQuake installation
-echo ==================================
+echo Welcome to the nQuake v2.0 installation
+echo =======================================
 echo
 echo Press ENTER to use [default] option.
 echo
 
 # Create the nQuake folder
-defaultdir="/Applications/nQuake"
+defaultdir="~/Applications/nQuake"
 read -p "Where do you want to install nQuake? [$defaultdir]: " directory
 eval directory=$directory
 if [ "$directory" = "" ]
@@ -48,7 +48,8 @@ else
 fi
 
 # Search for pak1.pak
-defaultsearchdir="~/"
+defaultsearchdir="~"
+pak=""
 read -p "Do you want setup to search for pak1.pak? (y/n) [n]: " search
 if [ "$search" = "y" ]
 then
@@ -122,140 +123,50 @@ then
         echo "$mirrorname"
 fi
 mkdir -p id1
-echo;echo
+echo
 
 # Download all the packages
 echo "=== Downloading ==="
-echo "Downloading demos.zip..."
-curl $proxy -o demos.zip -O $mirror/demos.zip
+echo "Downloading Quake Shareware..."
+curl $proxy -o qsw106.zip -O $mirror/qsw106.zip
 echo
-if [ -s "demos.zip" ]
+if [ -s "qsw106.zip" ]
 then
-	if [ "$(du demos.zip | cut -f1)" \> "0" ]
+	if [ "$(du qsw106.zip | cut -f1)" \> "0" ]
 	then
-		echo "Downloading textures.zip..."
-		curl $proxy -o textures.zip -O $mirror/textures.zip
+		echo "Downloading nQuake setup files (1 of 2)..."
+		curl $proxy -o gpl.zip -O $mirror/gpl.zip
 		echo
 	fi
 fi
-if [ -s "textures.zip" ]
+if [ -s "gpl.zip" ]
 then
-	if [ "$(du textures.zip | cut -f1)" \> "0" ]
+	if [ "$(du gpl.zip | cut -f1)" \> "0" ]
 	then
-		echo "Downloading models.zip..."
-		curl $proxy -o models.zip -O $mirror/models.zip
+		echo "Downloading nQuake setup files (2 of 2)..."
+		curl $proxy -o non-gpl.zip -O $mirror/non-gpl.zip
 		echo
 	fi
 fi
-if [ -s "models.zip" ]
+if [ -s "non-gpl.zip" ]
 then
-        if [ "$(du models.zip | cut -f1)" \> "0" ]
+        if [ "$(du non-gpl.zip | cut -f1)" \> "0" ]
         then
-                echo "Downloading skins.zip..."
-                curl $proxy -o skins.zip -O $mirror/skins.zip
-                echo
-        fi
-fi
-if [ -s "skins.zip" ]
-then
-        if [ "$(du skins.zip | cut -f1)" \> "0" ]
-        then
-                echo "Downloading lits.zip..."
-                curl $proxy -o lits.zip -O $mirror/lits.zip
-                echo
-        fi
-fi
-if [ -s "lits.zip" ]
-then
-        if [ "$(du lits.zip | cut -f1)" \> "0" ]
-        then
-                echo "Downloading ezquake.zip..."
-                curl $proxy -o ezquake.zip -O $mirror/ezquake.zip
-                echo
-        fi
-fi
-if [ -s "ezquake.zip" ]
-then
-	if [ "$(du ezquake.zip | cut -f1)" \> "0" ]
-	then
-		echo "Downloading ezquake-macosx.zip..."
-        	curl $proxy -o ezquake-macosx.zip -O $mirror/ezquake-macosx.zip
-		echo
-	fi
-fi
-if [ -s "ezquake-macosx.zip" ]
-then
-	if [ "$(du ezquake-macosx.zip | cut -f1)" \> "0" ]
-	then
-		echo "Downloading frogbot.zip..."
-		curl $proxy -o frogbot.zip -O $mirror/frogbot.zip
-		echo
-	fi
-fi
-if [ -s "frogbot.zip" ]
-then
-	if [ "$(du frogbot.zip | cut -f1)" \> "0" ]
-	then
-		echo "Downloading maps.zip..."
-		curl $proxy -o maps.zip -O $mirror/maps.zip
-		echo
-	fi
-fi
-if [ -s "maps.zip" ]
-then
-	if [ "$(du maps.zip | cut -f1)" \> "0" ]
-	then
-		echo "Downloading misc.zip..."
-		curl $proxy -o misc.zip -O $mirror/misc.zip
-		echo
-	fi
-fi
-if [ -s "misc.zip" ]
-then
-	if [ "$(du misc.zip | cut -f1)" \> "0" ]
-	then
-		echo "Downloading misc-macosx.zip..."
-		curl $proxy -o misc-macosx.zip -O $mirror/misc-macosx.zip
-		echo
-	fi
-fi
-if [ -s "misc-macosx.zip" ]
-then
-        if [ "$(du misc-macosx.zip | cut -f1)" \> "0" ]
-        then
-                echo "Downloading misc_gpl.zip..."
-                curl $proxy -o misc_gpl.zip -O $mirror/misc_gpl.zip
-                echo
-        fi
-fi
-if [ -s "misc_gpl.zip" ]
-then
-        if [ "$(du misc_gpl.zip | cut -f1)" \> "0" ]
-        then
-                echo "Downloading misc_gpl-macosx.zip..."
-                curl $proxy -o misc_gpl-macosx.zip -O $mirror/misc_gpl-macosx.zip
-                echo
-        fi
-fi
-if [ -s "misc_gpl-macosx.zip" ]
-then
-        if [ "$(du misc_gpl-macosx.zip | cut -f1)" \> "0" ]
-        then
-                echo "Downloading qsw106.zip..."
-                curl $proxy -o qsw106.zip -O $mirror/qsw106.zip
+                echo "Downloading nQuake OS X files..."
+                curl $proxy -o macosx.zip -O $mirror/macosx.zip
                 echo
         fi
 fi
 
 # Terminate installation if not all packages were downloaded
-if [ -s "qsw106.zip" ]
+if [ -s "macosx.zip" ]
 then
-	if [ "$(du qsw106.zip | cut -f1)" \> "0" ]
+	if [ "$(du macosx.zip | cut -f1)" \> "0" ]
 	then
 		echo foo >> /dev/null
 	else
 		echo "Some distribution files failed to download. Better luck next time. Exiting."
-		rm -rf $directory/demos.zip $directory/textures.zip $directory/models.zip $directory/skins.zip $directory/lits.zip $directory/ezquake.zip $directory/ezquake-macosx.zip $directory/frogbot.zip $directory/maps.zip $directory/misc.zip $directory/misc-macosx.zip $directory/misc_gpl.zip $directory/misc_gpl-macosx.zip $directory/qsw106.zip $directory/nquake.ini
+		rm -rf $directory/qsw106.zip $directory/gpl.zip $directory/non-gpl.zip $directory/macosx.zip $directory/nquake.ini
 		if [ "$created" = "1" ]
 		then
 			read -p "The directory $directory is about to be removed, press Enter to confirm or CTRL+C to exit." remove
@@ -266,7 +177,7 @@ then
 	fi
 else
 	echo "Some distribution files failed to download. Better luck next time. Exiting."
-	rm -rf $directory/demos.zip $directory/textures.zip $directory/models.zip $directory/skins.zip $directory/lits.zip $directory/ezquake.zip $directory/ezquake-macosx.zip $directory/frogbot.zip $directory/maps.zip $directory/misc.zip $directory/misc-macosx.zip $directory/misc_gpl.zip $directory/misc_gpl-macosx.zip $directory/qsw106.zip $directory/nquake.ini
+	rm -rf $directory/qsw106.zip $directory/gpl.zip $directory/non-gpl.zip $directory/macosx.zip $directory/nquake.ini
         if [ "$created" = "1" ]
         then
 		read -p "The directory $directory is about to be removed, press Enter to confirm or CTRL+C to exit." remove
@@ -278,38 +189,20 @@ fi
 
 # Extract all the packages
 echo "=== Installing ==="
-echo -n "* Extracting demos.zip..."
-unzip -qqo demos.zip 2> /dev/null;echo "done"
-echo -n "* Extracting textures.zip..."
-unzip -qqo textures.zip 2> /dev/null;echo "done"
-echo -n "* Extracting models.zip..."
-unzip -qqo models.zip 2> /dev/null;echo "done"
-echo -n "* Extracting skins.zip..."
-unzip -qqo skins.zip 2> /dev/null;echo "done"
-echo -n "* Extracting lits.zip..."
-unzip -qqo lits.zip 2> /dev/null;echo "done"
-echo -n "* Extracting ezquake.zip..."
-unzip -qqo ezquake.zip 2> /dev/null;echo "done"
-echo -n "* Extracting ezquake-macosx.zip..."
-unzip -qqo ezquake-macosx.zip 2> /dev/null;echo "done"
-echo -n "* Extracting frogbot.zip..."
-unzip -qqo frogbot.zip 2> /dev/null;echo "done"
-echo -n "* Extracting maps.zip..."
-unzip -qqo maps.zip 2> /dev/null;echo "done"
-echo -n "* Extracting misc.zip..."
-unzip -qqo misc.zip 2> /dev/null;echo "done"
-echo -n "* Extracting misc-macosx.zip..."
-unzip -qqo misc-macosx.zip 2> /dev/null;echo "done"
-echo -n "* Extracting misc_gpl.zip..."
-unzip -qqo misc_gpl.zip 2> /dev/null;echo "done"
-echo -n "* Extracting misc_gpl-macosx.zip..."
-unzip -qqo misc_gpl-macosx.zip 2> /dev/null;echo "done"
-echo -n "* Extracting qsw106.zip..."
+echo -n "* Extracting Quake Shareware..."
 unzip -qqo qsw106.zip ID1/PAK0.PAK 2> /dev/null;echo "done"
+echo -n "* Extracting nQuake setup files (1 of 2)..."
+unzip -qqo gpl.zip 2> /dev/null;echo "done"
+echo -n "* Extracting nQuake setup files (2 of 2)..."
+unzip -qqo non-gpl.zip 2> /dev/null;echo "done"
+echo -n "* Extracting nQuake OS X files..."
+unzip -qqo macosx.zip 2> /dev/null;echo "done"
 if [ "$pak" != "" ]
 then
-	echo -n "* Copying pak1.pak..."
-	cp $pak $directory/id1/pak1.pak 2> /dev/null;echo "done"
+        echo -n "* Copying pak1.pak..."
+        cp $pak $directory/id1/pak1.pak 2> /dev/null
+	rm -rf $directory/id1/gpl_maps.pk3 $directory/id1/readme.txt
+	echo "done"
 fi
 echo
 
@@ -322,12 +215,12 @@ echo "done"
 
 # Remove the Windows specific files
 echo -n "* Removing Windows specific binaries..."
-rm -rf $directory/ezquake-gl.exe $directory/ezquake/sb/wget.exe $directory/qw/qizmo $directory/qw/qwdtools
+rm -rf $directory/ezquake-gl.exe $directory/ezquake/sb/wget.exe
 echo "done"
 
 # Remove distribution files
 echo -n "* Removing distribution files..."
-rm -rf $directory/demos.zip $directory/textures.zip $directory/models.zip $directory/skins.zip $directory/lits.zip $directory/ezquake.zip $directory/ezquake-macosx.zip $directory/frogbot.zip $directory/maps.zip $directory/misc.zip $directory/misc-macosx.zip $directory/misc_gpl.zip $directory/misc_gpl-macosx.zip $directory/qsw106.zip $directory/nquake.ini
+rm -rf $directory/qsw106.zip $directory/gpl.zip $directory/non-gpl.zip $directory/macosx.zip $directory/nquake.ini
 echo "done"
 
 # Make Mac OS X related updates
@@ -343,7 +236,7 @@ echo "done"
 
 # Convert DOS files to UNIX
 echo -n "* Converting DOS files to UNIX..."
-for file in $directory/ezquake/cfg/* $directory/ezquake/configs/* $directory/ezquake/keymaps/* $directory/ezquake/sb/* $directory/ezquake/gnu.txt $directory/qw/autoexec.cfg $directory/qw/pak.lst
+for file in $directory/readme.txt $directory/id1/readme.txt $directory/ezquake/cfg/* $directory/ezquake/configs/* $directory/ezquake/keymaps/* $directory/ezquake/sb/* $directory/ezquake/gnu.txt
 do
 	if [ -f "$file" ]
 	then
