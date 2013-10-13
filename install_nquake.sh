@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# nQuake Bash Installer Script v2.0 (for Mac OS X)
+# nQuake Bash Installer Script v2.1 (for Mac OS X)
 # by Empezar
 
 echo
-echo Welcome to the nQuake v2.0 installation
+echo Welcome to the nQuake v2.1 installation
 echo =======================================
 echo
 echo Press ENTER to use [default] option.
@@ -228,10 +228,6 @@ echo -n "* Making Mac OS X related updates..."
 # Change wget to curl in update_sources
 sed s/"wget -m -nd -O"/"curl $proxy -o"/ < $directory/ezquake/sb/update_sources > /tmp/.nquake.tmp
 sed s/"http"/"-O http"/ < /tmp/.nquake.tmp > $directory/ezquake/sb/update_sources
-# Add some more suitable variables to config.cfg
-echo >> $directory/ezquake/configs/config.cfg
-cat $directory/ezquake/configs/config-macosx.cfg >> $directory/ezquake/configs/config.cfg
-rm -rf $directory/ezquake/configs/config-macosx.cfg
 echo "done"
 
 # Convert DOS files to UNIX
