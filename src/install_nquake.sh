@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# nQuake Bash Installer Script v2.1 (for Mac OS X)
+# nQuake Bash Installer Script v2.2 (for Mac OS X)
 # by Empezar
 
 echo
-echo Welcome to the nQuake v2.1 installation
+echo Welcome to the nQuake v2.2 installation
 echo =======================================
 echo
 echo Press ENTER to use [default] option.
@@ -89,7 +89,7 @@ fi
 echo
 
 # Download nquake.ini
-curl $proxy -s -o nquake.ini -O http://nquake.sourceforge.net/nquake.ini
+curl $proxy -s -o nquake.ini -O https://raw.githubusercontent.com/nQuake/client-win32/master/etc/nquake.ini
 if [ -s "nquake.ini" ]
 then
 	echo foo >> /dev/null
