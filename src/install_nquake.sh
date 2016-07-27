@@ -215,7 +215,7 @@ echo "done"
 
 # Remove the Windows specific files
 echo -n "* Removing Windows specific binaries..."
-rm -rf $directory/ezquake-gl.exe $directory/ezquake/sb/wget.exe
+rm -rf $directory/ezquake.exe $directory/ezquake/sb/wget.exe
 echo "done"
 
 # Remove distribution files
@@ -242,11 +242,19 @@ do
 done
 echo "done"
 
+# ezQuake3 things.. symlink data paths to nQuake directory
+rm -rf $directory/ezQuake.app/Contents/Resources/id1
+ln -s $directory/id1 $directory/ezQuake.app/Contents/Resources/id1
+ln -s $directory/qw $directory/ezQuake.app/Contents/Resources/qw
+ln -s $directory/ezquake $directory/ezQuake.app/Contents/Resources/ezquake
+sed -i.bak "s/pak1.pak/pak0.pak/g" $directory/ezQuake.app/Contents/MacOS/ezquake
+rm $directory/ezQuake.app/Contents/MacOS/ezquake.bak
+
 # Set the correct permissions
 echo -n "* Setting permissions..."
 find $directory -type f -exec chmod -f 644 {} \;
 find $directory -type d -exec chmod -f 755 {} \;
-chmod -f +x $directory/EZQuake-GL.app/Contents/MacOS/EZQuake-GL 2> /dev/null
+chmod -f +x $directory/ezQuake.app/Contents/MacOS/* 2> /dev/null
 chmod -f +x $directory/ezquake/sb/update_sources 2> /dev/null
 echo "done"
 
