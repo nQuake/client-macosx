@@ -215,7 +215,7 @@ echo "done"
 
 # Remove the Windows specific files
 echo -n "* Removing Windows specific binaries..."
-rm -rf $directory/ezquake-gl.exe $directory/ezquake/sb/wget.exe
+rm -rf $directory/ezquake.exe $directory/ezquake/sb/wget.exe
 echo "done"
 
 # Remove distribution files
