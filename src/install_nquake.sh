@@ -210,7 +210,6 @@ echo
 echo "=== Cleaning up ==="
 echo -n "* Renaming files..."
 mv $directory/id1/PAK0.PAK $directory/id1/pak0.pak 2> /dev/null
-mv $directory/ezquake/sb/update_sources.bat $directory/ezquake/sb/update_sources
 echo "done"
 
 # Remove the Windows specific files
@@ -221,13 +220,6 @@ echo "done"
 # Remove distribution files
 echo -n "* Removing distribution files..."
 rm -rf $directory/qsw106.zip $directory/gpl.zip $directory/non-gpl.zip $directory/macosx.zip $directory/nquake.ini
-echo "done"
-
-# Make Mac OS X related updates
-echo -n "* Making Mac OS X related updates..."
-# Change wget to curl in update_sources
-sed s/"wget -m -nd -O"/"curl $proxy -o"/ < $directory/ezquake/sb/update_sources > /tmp/.nquake.tmp
-sed s/"http"/"-O http"/ < /tmp/.nquake.tmp > $directory/ezquake/sb/update_sources
 echo "done"
 
 # Convert DOS files to UNIX
@@ -255,7 +247,6 @@ echo -n "* Setting permissions..."
 find $directory -type f -exec chmod -f 644 {} \;
 find $directory -type d -exec chmod -f 755 {} \;
 chmod -f +x $directory/ezQuake.app/Contents/MacOS/* 2> /dev/null
-chmod -f +x $directory/ezquake/sb/update_sources 2> /dev/null
 echo "done"
 
 echo;echo "Installation complete. Happy gibbing!"
