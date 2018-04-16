@@ -14,8 +14,3 @@ nQuake for Mac OS X
     ./install_nquake.sh
 
 Depending on your architecture, you might have to compile your own ezQuake binary. You can find the ezQuake source code here: https://github.com/ezQuake/ezquake-source
-
--
-2016-07-01
-
-
