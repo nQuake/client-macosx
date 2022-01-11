@@ -1,14 +1,16 @@
 #!/bin/bash
 
-# nQuake Bash Installer Script v2.2 (for Mac OS X)
+# nQuake Bash Installer Script v2.3 (for Mac OS X)
 # by Empezar
 
 echo
-echo Welcome to the nQuake v2.2 installation
+echo Welcome to the nQuake v2.3 installation
 echo =======================================
 echo
 echo Press ENTER to use [default] option.
 echo
+
+CURL_FLAGS=" -O -L "
 
 # Create the nQuake folder
 defaultdir="~/Applications/nQuake"
@@ -89,7 +91,7 @@ fi
 echo
 
 # Download nquake.ini
-curl $proxy -s -o nquake.ini -O https://raw.githubusercontent.com/nQuake/client-win32/master/etc/nquake.ini
+curl $proxy -s $CURL_FLAGS https://raw.githubusercontent.com/nQuake/client-win32/master/etc/nquake.ini
 if [ -s "nquake.ini" ]
 then
 	echo foo >> /dev/null
@@ -128,14 +130,14 @@ echo
 # Download all the packages
 echo "=== Downloading ==="
 echo "Downloading Quake Shareware..."
-curl $proxy -o qsw106.zip -O $mirror/qsw106.zip
+curl $proxy $CURL_FLAGS $mirror/qsw106.zip
 echo
 if [ -s "qsw106.zip" ]
 then
 	if [ "$(du qsw106.zip | cut -f1)" \> "0" ]
 	then
 		echo "Downloading nQuake setup files (1 of 2)..."
-		curl $proxy -o gpl.zip -O $mirror/gpl.zip
+		curl $proxy $CURL_FLAGS $mirror/gpl.zip
 		echo
 	fi
 fi
@@ -144,7 +146,7 @@ then
 	if [ "$(du gpl.zip | cut -f1)" \> "0" ]
 	then
 		echo "Downloading nQuake setup files (2 of 2)..."
-		curl $proxy -o non-gpl.zip -O $mirror/non-gpl.zip
+		curl $proxy $CURL_FLAGS $mirror/non-gpl.zip
 		echo
 	fi
 fi
@@ -153,7 +155,7 @@ then
         if [ "$(du non-gpl.zip | cut -f1)" \> "0" ]
         then
                 echo "Downloading nQuake OS X files..."
-                curl $proxy -o macosx.zip -O $mirror/macosx.zip
+                curl $proxy $CURL_FLAGS $mirror/macosx.zip
                 echo
         fi
 fi
