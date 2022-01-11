@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# nQuake Bash Installer Script v2.2 (for Mac OS X)
+# nQuake Bash Installer Script v2.3 (for Mac OS X)
 # by Empezar
 
 echo
-echo Welcome to the nQuake v2.2 installation
+echo Welcome to the nQuake v2.3 installation
 echo =======================================
 echo
 echo Press ENTER to use [default] option.
